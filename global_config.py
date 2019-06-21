@@ -23,7 +23,8 @@ Redis_config = {
     "HOST": "127.0.0.1",
     "PORT": 6379,
     "AUTH": False,      # AUTH 为 True 时需要进行 用户认证
-    "PASSWORD": ""
+    "PASSWORD": "",
+    "DECODE_RESPONSES": True    # 是否对查询结果进行编码处理
 }
 
 # mongodb 数据库

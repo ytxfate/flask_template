@@ -13,7 +13,8 @@ Flask 开发模板
         |-- user                        --> user 模块开发（示例）
             |-- user.py                     --> user 具体模块开发（示例）
     |-- common_tools        --> 其他常用工具（例如：数据库连接等）
-        |-- operate_mongo.py                --> mongodb 数据库操作（实例）
+        |-- operate_mongo.py                --> MongoDB 数据库操作（实例）
+        |-- operate_redis.py                --> Redis 数据库操作（实例）
 ```
 
 
