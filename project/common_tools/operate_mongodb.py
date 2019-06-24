@@ -15,7 +15,7 @@ class OperateMongodb:
             return mongo_connection and mongo_database
         """
         if self.MongoDB_config['URL'] != '':
-            conn = pymongo.MongoClient(host=self.MongoDB_config[''])
+            conn = pymongo.MongoClient(host=self.MongoDB_config['URL'])
         else:
             conn = pymongo.MongoClient(host=self.MongoDB_config['HOST'], port=self.MongoDB_config['PORT'])
         db = conn.get_database(self.MongoDB_config['DEFAULT_DB'])

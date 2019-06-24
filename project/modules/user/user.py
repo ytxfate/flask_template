@@ -5,7 +5,9 @@
     用户模块
 """
 
-from flask import jsonify
+from flask import jsonify, Response
+
+from project.common_tools.jwt_auth import JWTAuth
 
 class UserModul:
     """
@@ -17,17 +19,16 @@ class UserModul:
     def login(self):
         ret_obj = {}
         if self.request.method == "GET":
-            args = self.request.args
-            print(args.get('id'))
+            req_args = self.request.args
             ret_obj = {"page": "login"}
             return jsonify(ret_obj)
             
         elif self.request.method == "POST":
-            form_data = self.request.form
-            print(form_data.get("username"))
-            request_json = self.request.json
-            print(request_json)
+            req_form = self.request.form
+            req_json = self.request.json
             ret_obj = {"auth": "true"}
+            jwt_str = JWTAuth().encode_jwt({'user_id': '1', 'username': 'user'})
+            user_info = JWTAuth().decode_jwt(jwt_str)
             return jsonify(ret_obj)
     
     def logout(self):

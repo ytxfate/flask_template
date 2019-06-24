@@ -5,7 +5,7 @@
     项目配置
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import flask_cors
 from werkzeug.exceptions import HTTPException
 from logging.config import dictConfig
@@ -48,11 +48,20 @@ for bp in BLUEPRINT_LIST:
 # 拦截器(用于用户身份认证等...)
 @app.before_request
 def app_before_request():
-    pass
+    jwt_str = request.headers['Authorization']
 
 # 全局异常处理
 @app.errorhandler(Exception)
 def global_exception_handler(e):
-    app.logger.error(e)
-    return jsonify({"error":"Exception"}), 400
-    
+    app.logger.error("Exception => " + str(e) +
+        "\n****** REQUEST DETAIL ******" +
+        "\nurl:  "+ request.url + 
+        "\nargs: "+ str(request.args.to_dict()) + 
+        "\nform: "+ str(request.form.to_dict()) + 
+        "\njson: "+ str(request.json) + 
+        "\n****************************"
+    )
+    if isinstance(e, HTTPException):
+        return jsonify({"error": "HTTP Exception"}), e.code
+    else:
+        return jsonify({"error":"Exception"}), 400
