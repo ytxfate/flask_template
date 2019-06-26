@@ -48,7 +48,7 @@ for bp in BLUEPRINT_LIST:
 # 拦截器(用于用户身份认证等...)
 @app.before_request
 def app_before_request():
-    jwt_str = request.headers['Authorization']
+    jwt_str = request.headers.get('Authorization')
 
 # 全局异常处理
 @app.errorhandler(Exception)
