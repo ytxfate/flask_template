@@ -22,7 +22,7 @@ class UserModul:
         if self.request.method == "GET":
             req_args = self.request.args
             ret_obj = {"page": "login"}
-            return jsonify(ret_obj)
+            return jsonify(ret_obj)     # jsonify 返回 json 格式数据
             
         elif self.request.method == "POST":
             req_form = self.request.form
@@ -35,8 +35,8 @@ class UserModul:
             resp.status = "201"
             resp.headers["content-type"] = "application/json"
             resp.headers["Authorization"] = jwt_str
-            return resp
+            return resp     # make_response 自己封装返回 json 格式数据，可同时设置 headers 相关值
     
     def logout(self):
         ret_obj = {"logout": "true"}
-        return Response(json.dumps(ret_obj, ensure_ascii=False), mimetype='application/json')
+        return Response(json.dumps(ret_obj, ensure_ascii=False), mimetype='application/json')   # Response 封装返回 json 格式数据
