@@ -5,7 +5,8 @@
     用户模块
 """
 
-from flask import jsonify, Response
+from flask import jsonify, Response, make_response
+import json
 
 from project.common_tools.jwt_auth import JWTAuth
 
@@ -29,8 +30,13 @@ class UserModul:
             ret_obj = {"auth": "true"}
             jwt_str = JWTAuth().encode_jwt({'user_id': '1', 'username': 'user'})
             user_info = JWTAuth().decode_jwt(jwt_str)
-            return jsonify(ret_obj)
+            # 自己封装 response
+            resp = make_response(json.dumps(ret_obj, ensure_ascii=False))
+            resp.status = "201"
+            resp.headers["content-type"] = "application/json"
+            resp.headers["Authorization"] = jwt_str
+            return resp
     
     def logout(self):
         ret_obj = {"logout": "true"}
-        return jsonify(ret_obj)
+        return Response(json.dumps(ret_obj, ensure_ascii=False), mimetype='application/json')
