@@ -41,8 +41,10 @@ root_url = '/api'   # 当服务器使用 nginx 做反向代理的时候
                     # 可修改 root_url 已便 nginx 拦截请求
                     # 若不需要可以设置为空
 from project.blueprint_manager.user_blueprint_manager import user
+from project.blueprint_manager.file_upload_download import file
 BLUEPRINT_LIST = [
-    {"blueprint": user, "url_prefix": root_url + "/user"}
+    {"blueprint": user, "url_prefix": root_url + "/user"},
+    {"blueprint": file, "url_prefix": root_url + "/file"}
 ]
 for bp in BLUEPRINT_LIST:
     app.register_blueprint(bp['blueprint'], url_prefix=bp['url_prefix'])
