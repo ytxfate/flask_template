@@ -9,6 +9,7 @@ from flask import jsonify, Response, make_response
 import json
 
 from project.common_tools.jwt_auth import JWTAuth
+from project.common_tools.common_return import common_return
 
 class UserModul:
     """
@@ -22,7 +23,8 @@ class UserModul:
         if self.request.method == "GET":
             req_args = self.request.args
             ret_obj = {"page": "login"}
-            return jsonify(ret_obj)     # jsonify 返回 json 格式数据
+            # return jsonify(ret_obj)     # jsonify 返回 json 格式数据
+            return common_return(resp=ret_obj)  # 使用 common_return 做统一返回
             
         elif self.request.method == "POST":
             req_form = self.request.form

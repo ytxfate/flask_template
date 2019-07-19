@@ -4,3 +4,4 @@
 # request.json ==> dict
 # request.args ==> werkzeug.datastructures.ImmutableMultiDict
 # request.form ==> werkzeug.datastructures.ImmutableMultiDict
+# request.data ==> bytes
