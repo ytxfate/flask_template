@@ -17,7 +17,7 @@ class OperateMongodb:
         连接 MongoDB 数据库
             return mongo_connection and mongo_database
         """
-        if self.MongoDB_config['URL'] != '':
+        if 'URL' in self.MongoDB_config and self.MongoDB_config['URL'] != '':
             conn = pymongo.MongoClient(host=self.MongoDB_config['URL'])
         else:
             conn = pymongo.MongoClient(host=self.MongoDB_config['HOST'], port=self.MongoDB_config['PORT'])
