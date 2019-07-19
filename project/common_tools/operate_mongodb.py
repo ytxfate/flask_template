@@ -1,13 +1,16 @@
 import pymongo
 
-from global_config import MongoDB_config
+from global_config import MongoDB_config, MongoDB_config_test, isFormalSystem
 
 class OperateMongodb:
     """
     MongoDB 数据库操作
     """
     def __init__(self):
-        self.MongoDB_config = MongoDB_config
+        if isFormalSystem:
+            self.MongoDB_config = MongoDB_config
+        else:
+            self.MongoDB_config = MongoDB_config_test
     
     def conn_mongodb(self):
         """

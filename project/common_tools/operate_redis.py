@@ -1,12 +1,15 @@
 import redis
 
-from global_config import Redis_config
+from global_config import Redis_config, Redis_config_test, isFormalSystem
 class OperateRedis:
     """
     操作 Redis 数据库
     """
     def __init__(self):
-        self.Redis_config = Redis_config
+        if isFormalSystem:
+            self.Redis_config = Redis_config
+        else:
+            self.Redis_config = Redis_config_test
     
     def conn_redis(self):
         """
