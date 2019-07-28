@@ -2,6 +2,7 @@ import pymongo
 
 from global_config import MongoDB_config, MongoDB_config_test, isFormalSystem
 
+
 class OperateMongodb:
     """
     MongoDB 数据库操作
@@ -22,6 +23,6 @@ class OperateMongodb:
         else:
             conn = pymongo.MongoClient(host=self.MongoDB_config['HOST'], port=self.MongoDB_config['PORT'])
         db = conn.get_database(self.MongoDB_config['DEFAULT_DB'])
-        if self.MongoDB_config['AUTH'] == True:
+        if self.MongoDB_config['AUTH'] is True:
             db.authenticate(self.MongoDB_config['USERNAME'], self.MongoDB_config['PASSWORD'])
         return conn, db

@@ -9,6 +9,7 @@ import time
 # 上传文件存储路径
 UPLOAD_FILE_PATH = "./file/upload/"
 
+
 class FileUpload:
     def __init__(self, request):
         self.request = request

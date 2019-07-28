@@ -11,6 +11,7 @@ import json
 from project.common_tools.jwt_auth import JWTAuth
 from project.common_tools.common_return import common_return
 
+
 class UserModul:
     """
     用户模块

@@ -1,6 +1,8 @@
 import redis
 
 from global_config import Redis_config, Redis_config_test, isFormalSystem
+
+
 class OperateRedis:
     """
     操作 Redis 数据库
@@ -15,7 +17,7 @@ class OperateRedis:
         """
         连接 Redis 数据库
         """
-        if self.Redis_config['AUTH'] == True:
+        if self.Redis_config['AUTH'] is True:
             pool = redis.ConnectionPool(
                 host=self.Redis_config['HOST'],
                 port=self.Redis_config['PORT']

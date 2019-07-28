@@ -2,14 +2,13 @@
 # -*- coding: UTF-8 -*-
 
 from flask import jsonify, send_from_directory, send_file
-from werkzeug.utils import secure_filename
 import os
-import time
 import csv
 import io
 
 # 下载文件存储路径
 DOWNLOAD_FILE_PATH = "./file/download/"
+
 
 class FileDownload:
     def __init__(self, request):

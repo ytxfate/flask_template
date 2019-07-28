@@ -5,10 +5,13 @@
     项目配置
 """
 
-from flask import Flask, jsonify, request
+from flask import Flask, request
 import flask_cors
 from werkzeug.exceptions import HTTPException
 from logging.config import dictConfig
+
+from project.common_tools import http_response_code
+from project.common_tools.common_return import common_return
 
 # 日志配置
 dictConfig({
@@ -57,16 +60,28 @@ def app_before_request():
 
 # 全局异常处理
 @app.errorhandler(Exception)
-def global_exception_handler(e):
-    app.logger.error("Exception => " + str(e) +
-        "\n****** REQUEST DETAIL ******" +
-        "\nurl:  "+ request.url + 
-        "\nargs: "+ str(request.args.to_dict()) + 
-        "\nform: "+ str(request.form.to_dict()) + 
-        "\njson: "+ str(request.json) + 
-        "\n****************************"
-    )
-    if isinstance(e, HTTPException):
-        return jsonify({"error": "HTTP Exception"}), e.code
+def global_exception_handler(exp):
+    try:
+        req_args = request.args.to_dict()
+    except Exception as e:
+        req_args = {"ERROR": str(e)}
+    try:
+        req_form = request.form.to_dict()
+    except Exception as e:
+        req_form = {"ERROR": str(e)}
+    try:
+        req_json = request.json
+    except Exception as e:
+        req_json = {"ERROR": str(e)}
+    app.logger.error("Exception => " + str(exp) +
+                     "\n****** REQUEST DETAIL ******" +
+                     "\nurl:  " + request.url +
+                     "\nargs: " + str(req_args) +
+                     "\nform: " + str(req_form) +
+                     "\njson: " + str(req_json) +
+                     "\n****************************"
+                     )
+    if isinstance(exp, HTTPException):
+        return common_return(code=http_response_code.EXCEPTION_ERROR, isSuccess=False, msg="HTTP Exception")
     else:
-        return jsonify({"error":"Exception"}), 400
+        return common_return(code=http_response_code.EXCEPTION_ERROR, isSuccess=False, msg="Exception")

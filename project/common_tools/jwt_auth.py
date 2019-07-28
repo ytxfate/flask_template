@@ -1,8 +1,12 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 import datetime
 import time
 import jwt
 
 from global_config import SECRET_KEY as flask_secret_key
+
 
 class JWTAuth:
     """
@@ -10,8 +14,8 @@ class JWTAuth:
     """
     def __init__(self):
         pass
-    
-    def encode_jwt(self, user_info, validity_period = 30):
+
+    def encode_jwt(self, user_info, validity_period=30):
         """
         生成 jwt 认证信息
             :param user_info 必须包含以下字段
