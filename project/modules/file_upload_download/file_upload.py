@@ -5,6 +5,7 @@ from flask import jsonify
 from werkzeug.utils import secure_filename
 import os
 import time
+from pypinyin import lazy_pinyin
 
 # 上传文件存储路径
 UPLOAD_FILE_PATH = "./file/upload/"
@@ -22,7 +23,8 @@ class FileUpload:
         file = self.request.files.get("file")
         if file and file.filename != "":
             # 使用 secure_filename 格式化文件名称
-            file_name = secure_filename(file.filename)
+            # lazy_pinyin 用于解决中文文件名的文件
+            file_name = secure_filename(''.join(lazy_pinyin(file.filename)))
             # 获取文件的后缀名
             file_end_with = file_name.rsplit(".")[1]
             # 为上传的文件创建新的文件名
