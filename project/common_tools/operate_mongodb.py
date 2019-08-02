@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 import pymongo
 
 from global_config import MongoDB_config, MongoDB_config_test, isFormalSystem

@@ -15,6 +15,12 @@ Flask 开发模板
     |-- common_tools        --> 其他常用工具（例如：数据库连接等）
         |-- operate_mongo.py                --> MongoDB 数据库操作（实例）
         |-- operate_redis.py                --> Redis 数据库操作（实例）
+        |-- check_param_imp_keys.py         --> 检测请求参数
+        |-- common_return.py                --> 统一 response 封装
+        |-- http_response_code.py           --> response 状态码  （其他状态码可自行根据开发需要添加添加）
+|-- file            --> 上传下载文件放置目录
+    |-- download    --> 下载文件放置目录
+    |-- upload      --> 上传文件放置目录
 ```
 
 

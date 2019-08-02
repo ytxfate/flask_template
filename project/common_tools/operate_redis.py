@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 import redis
 
 from global_config import Redis_config, Redis_config_test, isFormalSystem

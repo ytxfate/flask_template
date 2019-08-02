@@ -1,7 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 from flask import jsonify
 
+from project.common_tools import http_response_code
 
-def common_return(code=200, isSuccess=True, msg="请求成功", resp={}):
+def common_return(code=http_response_code.SUCCESS, isSuccess=True, msg="请求成功", resp={}):
     """
     接口统一返回模板
         Args:
