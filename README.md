@@ -27,3 +27,24 @@ Flask 开发模板
 ```
 说明：示例部分可随项目的开发进行调整
 ```
+
+**uwsgi 配置说明(注意：实际部署中最好把注释去掉)**
+```
+http = 0.0.0.0:5000
+plugin = python3        ; 使用插件-编程语言
+chdir = /opt/flask/flask_template    ; 指定项目目录
+processes = 4           ; 开启进程数量
+threads = 2
+enable-threads = true   ; 允许用内嵌的语言启动线程;这将允许你在app程序中产生一个子线程
+max-requests = 8192     ; 设置每个进程请求数上限
+master = true           ; 允许主线程存在
+wsgi-file = ./main.py
+callable = app
+; home = ../venv      ; 虚拟环境目录
+```
+```
+启动命令: uwsgi --ini uwsgin.ini
+重启命令: uwsgi --reload uwsgi.pid
+关闭命令: uwsgi --stop uwsgi.pid
+实时状态: uwsgi --connect-and-read uwsgi/uwsgi.status
+```
