@@ -23,3 +23,4 @@ DATA_UPDATE_ERROR = 1003                # 数据库数据更新出错
 DATA_DELETE_ERROR = 1004                # 数据库数据删除出错
 DOCUMENTS_ARE_NOT_SUPPORTED = 1005      # 不支持的文件上传格式
 FILE_NOT_FOUND = 1006                   # 文件不存在
+DATA_CREATE_ERROR = 1007                # 数据生成异常

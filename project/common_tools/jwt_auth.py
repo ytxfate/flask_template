@@ -42,29 +42,21 @@ class JWTAuth:
     def encode_jwt(self, user_info, validity_period=30):
         """
         生成 jwt 认证信息
-            :param user_info 必须包含以下字段
-                [ user_id, username ]
-            :param validity_period 
-                jwt 有效期，默认 30 分钟
-            
-            :return: jwt 字串
-
-            :rtype: str
+            @param:
+                user_info: jwt 需要存储数据
+                validity_period: jwt 有效期，默认 30 分钟
+            @return:
+                jwt 字串
         """
         jwt_body = ''
-        payload_need_key = ['user_id', 'username']
         try:
-            if set(user_info.keys()) == set(payload_need_key):
-                payload = {
-                    'exp': time.mktime((datetime.datetime.now() + datetime.timedelta(minutes=validity_period)).timetuple()),    # 过期时间
-                    'iat': time.mktime(datetime.datetime.now().timetuple()),     # 发行时间
-                    'iss': 'ken',       # token签发者
-                    'data': {       # 数据(自行添加)
-                        'user_id': user_info['user_id'],
-                        'username': user_info['username']
-                    }
-                }
-                jwt_body = jwt.encode(payload, self.secret_key, algorithm='HS256').decode(encoding='utf-8')
+            payload = {
+                'exp': time.mktime((datetime.datetime.now() + datetime.timedelta(minutes=validity_period)).timetuple()),    # 过期时间
+                'iat': time.mktime(datetime.datetime.now().timetuple()),    # 发行时间
+                'iss': 'hsd',   # token签发者
+                'data': user_info
+            }
+            jwt_body = jwt.encode(payload, self.secret_key, algorithm='HS256').decode(encoding='utf-8')
         except Exception as e:
             pass
         return jwt_body
@@ -72,20 +64,19 @@ class JWTAuth:
     def decode_jwt(self, jwt_body):
         """
         解析 jwt 认证信息
-            :param jwt_body
-                jwt 字串
-            
-            :return: jwt 字串中的用户信息
-                当 key jwt_status 为 T 时，解析成功；否则解析失败
-            
-            :rtype: dict
+            @param:
+                jwt_body: jwt 字串
+            @return:
+                解析状态 及 jwt 字串中的用户信息
+                当 解析状态 为 True 时，解析成功；否则解析失败            
         """
-        user_info = {'jwt_status': 'F'}
+        user_info = {}
+        decode_status = False
         try:
             jwt_payload = jwt.decode(jwt_body.encode(encoding='utf-8'), self.secret_key, options={'verify_exp': True})
             if jwt_payload and 'data' in jwt_payload:
                 user_info = jwt_payload['data']
-                user_info['jwt_status'] = 'T'
+                decode_status = True
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError) as e:
             pass
-        return user_info
+        return decode_status, user_info

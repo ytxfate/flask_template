@@ -21,11 +21,11 @@ conn_redis = OperateRedis().conn_redis()
 user = Blueprint("user", __name__)
 
 
-@user.route('/login', methods=["GET", "POST"])
+@user.route('/login', methods=["POST"])
 def user_login():
     return UserModul(request).login()
 
 
-@user.route("/logout", methods=["GET",'POST'])
+@user.route("/logout", methods=['GET'])
 def user_logout():
     return UserModul(request).logout()
