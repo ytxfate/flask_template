@@ -26,7 +26,8 @@ class OperateMongodb:
     def conn_mongodb(self):
         """
         连接 MongoDB 数据库
-            return mongo_connection and mongo_database
+            @return:
+                mongo_connection and mongo_database
         """
         if 'URL' in self.MongoDB_config and self.MongoDB_config['URL'] != '':
             conn = pymongo.MongoClient(host=self.MongoDB_config['URL'])

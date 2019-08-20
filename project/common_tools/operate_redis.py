@@ -26,6 +26,8 @@ class OperateRedis:
     def conn_redis(self):
         """
         连接 Redis 数据库
+            @return:
+                redis_connection
         """
         if self.Redis_config['AUTH'] is True:
             pool = redis.ConnectionPool(
