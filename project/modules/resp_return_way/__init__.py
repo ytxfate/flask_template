@@ -3,7 +3,7 @@
 
 '''
 @File :  __init__.py
-@Desc :  公共模块
+@Desc :  response 返回案列模块
 '''
 
 # The Python Standard Modules(Library) and Third Modules(Library)

@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
+'''
+@File :  file_download.py
+@Desc :  文件下载模块
+'''
+
+# The Python Standard Modules(Library) and Third Modules(Library)
 from flask import jsonify, send_from_directory, send_file
 import os
 import csv
 import io
+
+# User-defined Modules
+
 
 # 下载文件存储路径
 DOWNLOAD_FILE_PATH = "./file/download/"

@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
-"""
-    主运行脚本
-"""
+'''
+@File :  main.py
+@Desc :  项目启动模块
+'''
 
+# The Python Standard Modules(Library) and Third Modules(Library)
+
+# User-defined Modules
 from app import app
 from global_config import app_run_config
+
 
 if __name__ == '__main__':
     app.run(

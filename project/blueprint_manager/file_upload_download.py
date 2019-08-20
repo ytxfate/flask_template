@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
-"""
-    蓝图管理模块
-"""
+'''
+@File :  file_upload_download.py
+@Desc :  文件上传下载蓝图管理模块
+'''
 
+# The Python Standard Modules(Library) and Third Modules(Library)
 from flask import Blueprint, request
 
+# User-defined Modules
 from project.modules.file_upload_download.file_upload import FileUpload
 from project.modules.file_upload_download.file_download import FileDownload
 from project.common_tools.operate_mongodb import OperateMongodb
 from project.common_tools.operate_redis import OperateRedis
+
 
 conn_mongo, db_mongo = OperateMongodb().conn_mongodb()
 conn_redis = OperateRedis().conn_redis()

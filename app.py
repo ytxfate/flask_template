@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
-"""
-    项目配置
-"""
+'''
+@File :  app.py
+@Desc :  项目基本配置模块
+'''
 
+# The Python Standard Modules(Library) and Third Modules(Library)
 from flask import Flask, request
 import flask_cors
 from werkzeug.exceptions import HTTPException
 from logging.config import dictConfig
 
+# User-defined Modules
 from project.common_tools import http_response_code
 from project.common_tools.common_return import common_return
+import global_config
+
 
 # 日志配置
 dictConfig({
@@ -31,7 +36,6 @@ dictConfig({
     }
 })
 
-import global_config
 
 app = Flask(__name__)
 # 密钥
@@ -45,9 +49,11 @@ root_url = '/api'   # 当服务器使用 nginx 做反向代理的时候
                     # 若不需要可以设置为空
 from project.blueprint_manager.user_blueprint_manager import user
 from project.blueprint_manager.file_upload_download import file
+from project.blueprint_manager.resp_return_way_blueprint import resp_return_way
 BLUEPRINT_LIST = [
     {"blueprint": user, "url_prefix": root_url + "/user"},
-    {"blueprint": file, "url_prefix": root_url + "/file"}
+    {"blueprint": file, "url_prefix": root_url + "/file"},
+    {"blueprint": resp_return_way, "url_prefix": root_url + "/resp_return_way"},
 ]
 for bp in BLUEPRINT_LIST:
     app.register_blueprint(bp['blueprint'], url_prefix=bp['url_prefix'])

@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
+'''
+@File :  file_upload.py
+@Desc :  文件上传模块
+'''
+
+# The Python Standard Modules(Library) and Third Modules(Library)
 from flask import jsonify
 from werkzeug.utils import secure_filename
 import os
 import time
 from pypinyin import lazy_pinyin
+
+# User-defined Modules
+
 
 # 上传文件存储路径
 UPLOAD_FILE_PATH = "./file/upload/"

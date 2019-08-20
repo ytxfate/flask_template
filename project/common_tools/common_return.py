@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
+'''
+@File :  common_return.py
+@Desc :  response 统一返回封装
+'''
+
+# The Python Standard Modules(Library) and Third Modules(Library)
 from flask import jsonify
 
+# User-defined Modules
 from project.common_tools import http_response_code
+
 
 def common_return(code=http_response_code.SUCCESS, isSuccess=True, msg="请求成功", resp={}):
     """

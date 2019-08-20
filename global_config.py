@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
-"""
-    项目相关配置
-"""
+'''
+@File :  global_config.py
+@Desc :  项目配置信息模块
+'''
+
+# The Python Standard Modules(Library) and Third Modules(Library)
+
+# User-defined Modules
 
 
 # ********** 运行配置 ********** #

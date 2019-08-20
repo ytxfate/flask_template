@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
-"""
-    用户模块
-"""
+'''
+@File :  user.py
+@Desc :  用户管理模块
+'''
 
+# The Python Standard Modules(Library) and Third Modules(Library)
 from flask import jsonify, Response, make_response
 import json
 
+# User-defined Modules
 from project.common_tools.jwt_auth import JWTAuth
 from project.common_tools.common_return import common_return
 

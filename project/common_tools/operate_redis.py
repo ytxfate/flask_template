@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
-# -*- coding: UTF-8 -*-
+# -*- encoding: utf-8 -*-
 
+'''
+@File :  operate_redis.py
+@Desc :  操作 Redis 数据库
+'''
+
+# The Python Standard Modules(Library) and Third Modules(Library)
 import redis
 
+# User-defined Modules
 from global_config import Redis_config, Redis_config_test, isFormalSystem
 
 

@@ -2,12 +2,13 @@
 # -*- encoding: utf-8 -*-
 
 '''
-@File    :   check_request_param.py
-@Time    :   2019-08-14 10:16:48
-@Desc    :   检查 request 请求参数
+@File :  check_request_param.py
+@Desc :  检查 request 请求参数
 '''
 
-# here put the import lib
+# The Python Standard Modules(Library) and Third Modules(Library)
+
+# User-defined Modules
 
 
 def check_param_must_keys(must_key_collection, request_dict):
