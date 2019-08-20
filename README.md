@@ -8,21 +8,29 @@ Flask 开发模板
 |-- global_config.py    --> 全局配置文件
 |-- project             --> 项目入口
     |-- blueprint_manager   --> 蓝图模块管理
-        |-- user_blueprint_manager.py   --> user 模块蓝图管理（示例）
-    |-- modules             --> 项目模块管理
-        |-- user                        --> user 模块开发（示例）
-            |-- user.py                     --> user 具体模块开发（示例）
-    |-- common_tools        --> 其他常用工具（例如：数据库连接等）
-        |-- operate_mongo.py                --> MongoDB 数据库操作（实例）
-        |-- operate_redis.py                --> Redis 数据库操作（实例）
-        |-- check_param_imp_keys.py         --> 检测请求参数
-        |-- common_return.py                --> 统一 response 封装
-        |-- http_response_code.py           --> response 状态码  （其他状态码可自行根据开发需要添加添加）
-|-- file            --> 上传下载文件放置目录
+        |-- file_upload_download.py         --> 文件上传下载 模块蓝图管理（示例）
+        |-- resp_return_way_blueprint.py    --> response 返回方式 模块蓝图管理（示例）
+        |-- user_blueprint_manager.py       --> user 模块蓝图管理（示例）
+    |-- modules                 --> 项目模块管理
+        |-- user                    --> user 模块开发（示例）
+            |-- user.py                 --> user 具体模块开发（示例）
+        |-- file_upload_download    --> 文件模块（示例）
+            |-- file_download.py        --> 文件下载模块（示例）
+            |-- file_upload.py          --> 文件上传模块（示例）
+        |-- resp_return_way         --> response 返回方式模块（示例）
+            |-- resp_return_way.py      --> response 返回方式模块（示例）
+    |-- common_tools                --> 其他常用工具（例如：数据库连接等）
+        |-- operate_mongodb.py          --> MongoDB 数据库操作（实例）
+        |-- operate_redis.py            --> Redis 数据库操作（实例）
+        |-- check_request_param.py      --> 检测请求参数
+        |-- common_return.py            --> 统一 response 封装
+        |-- http_response_code.py       --> response 状态码  （其他状态码可自行根据开发需要添加添加）
+        |-- jwt_auth.py                 --> JWT 编码 及 解码
+|-- file        --> 上传下载文件放置目录
     |-- download    --> 下载文件放置目录
     |-- upload      --> 上传文件放置目录
+|-- uwsgi.ini   --> uwsgi 启动配置文件
 ```
-
 
 ```
 说明：示例部分可随项目的开发进行调整
@@ -42,6 +50,7 @@ wsgi-file = ./main.py
 callable = app
 ; home = ../venv      ; 虚拟环境目录
 ```
+
 ```
 启动命令: uwsgi --ini uwsgin.ini
 重启命令: uwsgi --reload uwsgi.pid
