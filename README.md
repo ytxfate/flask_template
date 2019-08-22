@@ -22,7 +22,7 @@ Flask 开发模板
     |-- common_tools                --> 其他常用工具（例如：数据库连接等）
         |-- operate_mongodb.py          --> MongoDB 数据库操作（实例）
         |-- operate_redis.py            --> Redis 数据库操作（实例）
-        |-- check_request_param.py      --> 检测请求参数
+        |-- check_and_handle_request_param.py   --> 检查及处理 request 请求参数
         |-- common_return.py            --> 统一 response 封装
         |-- http_response_code.py       --> response 状态码  （其他状态码可自行根据开发需要添加添加）
         |-- jwt_auth.py                 --> JWT 编码 及 解码
