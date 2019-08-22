@@ -14,9 +14,8 @@ import copy
 # User-defined Modules
 from project.common_tools.jwt_auth import JWTAuth
 from project.common_tools.common_return import common_return
-from project.common_tools.check_request_param import check_param_must_keys
 from project.common_tools import http_response_code
-
+from project.common_tools.check_and_handle_request_param import CheckAndHandleRequestParam
 
 class UserModul:
     """
@@ -30,9 +29,12 @@ class UserModul:
         登录
         """
         req_dict = copy.deepcopy(self.request.json)
-        must_key_collection = ['username', 'password']
-        check_param_must_status = check_param_must_keys(must_key_collection, req_dict)
-        if check_param_must_status:
+        must_need_keys = ['username', 'password']
+        check_status, req_dict = CheckAndHandleRequestParam(req_dict).main_contraller(
+            remove_spaces=True, must_need_keys=must_need_keys,
+            can_change_keys=[], need_regexp_keys=[]
+        )   # 默认值相同字段可省略
+        if check_status:
             user_info = {'username': req_dict['username']}
             jwt_str = JWTAuth().encode_jwt(user_info)
             if jwt_str:
