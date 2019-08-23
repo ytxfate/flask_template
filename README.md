@@ -62,7 +62,7 @@ callable = app
 
 ----------
 
-### Python 环境部署说明
+### Python 环境部署方案说明
 
 1. 生成 requirements.txt 文件
 ```
