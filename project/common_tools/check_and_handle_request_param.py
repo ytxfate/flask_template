@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- encoding: utf-8 -*-
+# -*- coding:utf-8 -*-
 
 '''
 @File :  check_and_handle_request_param.py
