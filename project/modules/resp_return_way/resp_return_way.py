@@ -34,4 +34,7 @@ class RespReturnWay:
         return resp     # make_response 自己封装返回 json 格式数据，可同时设置 headers 相关值
     
     def use_response(self):
-        return Response(json.dumps({'way': "Response"}, ensure_ascii=False), mimetype='application/json')   # Response 封装返回 json 格式数据
+        return Response(
+            json.dumps({'way': "Response"}, ensure_ascii=False),
+            mimetype='application/json'
+        )   # Response 封装返回 json 格式数据

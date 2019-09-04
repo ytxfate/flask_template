@@ -51,7 +51,9 @@ class JWTAuth:
         jwt_body = ''
         try:
             payload = {
-                'exp': time.mktime((datetime.datetime.now() + datetime.timedelta(minutes=validity_period)).timetuple()),    # 过期时间
+                'exp': time.mktime((
+                    datetime.datetime.now() + datetime.timedelta(minutes=validity_period)
+                ).timetuple()),    # 过期时间
                 'iat': time.mktime(datetime.datetime.now().timetuple()),    # 发行时间
                 'iss': 'hsd',   # token签发者
                 'data': user_info
@@ -73,7 +75,11 @@ class JWTAuth:
         user_info = {}
         decode_status = False
         try:
-            jwt_payload = jwt.decode(jwt_body.encode(encoding='utf-8'), self.secret_key, options={'verify_exp': True})
+            jwt_payload = jwt.decode(
+                jwt_body.encode(encoding='utf-8'),
+                self.secret_key,
+                options={'verify_exp': True}
+            )
             if jwt_payload and 'data' in jwt_payload:
                 user_info = jwt_payload['data']
                 decode_status = True
