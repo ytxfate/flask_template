@@ -20,6 +20,7 @@ class JWTAuth:
     """
     JSON Web Token 用户认证
     """
+    VALIDITY_PERIOD = 30
     def __init__(self):
         # 对 falsk secret_key 进行二次处理，用于 jwt 加密
         self.secret_key = self.encrypt_md5(flask_secret_key)
@@ -39,7 +40,7 @@ class JWTAuth:
         m.update(encrypt_str)
         return m.hexdigest()
 
-    def encode_jwt(self, user_info, validity_period=30):
+    def __encode_jwt(self, user_info, validity_period=VALIDITY_PERIOD):
         """
         生成 jwt 认证信息
             @param:
@@ -48,7 +49,7 @@ class JWTAuth:
             @return:
                 jwt 字串
         """
-        jwt_body = ''
+        jwt_body = None
         try:
             payload = {
                 'exp': time.mktime((
@@ -83,6 +84,48 @@ class JWTAuth:
             if jwt_payload and 'data' in jwt_payload:
                 user_info = jwt_payload['data']
                 decode_status = True
-        except (jwt.ExpiredSignatureError, jwt.InvalidTokenError) as e:
+        except Exception as e:
             pass
         return decode_status, user_info
+    
+    def decode_jwt_without_check(self, jwt_body):
+        """
+        解析 jwt 认证信息，不验证 jwt_body 时效性
+            @param:
+                jwt_body: jwt 字串
+            @return:
+                当 解析状态 为 True 时，解析成功；否则解析失败            
+        """
+        user_info = {}
+        try:
+            jwt_payload = jwt.decode(
+                jwt_body.encode(encoding='utf-8'),
+                self.secret_key
+            )
+            if jwt_payload and 'data' in jwt_payload:
+                user_info = jwt_payload['data']
+        except Exception as e:
+            pass
+        return user_info
+    
+    def create_jwt_and_refresh_jwt(self, user_info, validity_period=VALIDITY_PERIOD):
+        """
+        生成 jwt 及 refresh_jwt 信息
+            @param:
+                user_info: jwt 需要存储数据
+                validity_period: jwt 有效期，默认 30 分钟
+            @return:
+                create_status jwt 生成状态
+                jwt 字串
+                refresh_jwt 字串
+        """
+        jwt = refresh_jwt = None
+        create_status = False
+        # 最多循环 5 次，否则生成失败
+        for i in range(5):
+            jwt = self.__encode_jwt(user_info,validity_period=validity_period)
+            refresh_jwt = self.__encode_jwt({}, validity_period=validity_period*2)
+            if jwt and refresh_jwt:
+                create_status = True
+                break
+        return create_status, jwt, refresh_jwt

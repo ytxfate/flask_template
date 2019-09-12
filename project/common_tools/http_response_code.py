@@ -24,3 +24,9 @@ DATA_DELETE_ERROR = 1004                # 数据库数据删除出错
 DOCUMENTS_ARE_NOT_SUPPORTED = 1005      # 不支持的文件上传格式
 FILE_NOT_FOUND = 1006                   # 文件不存在
 DATA_CREATE_ERROR = 1007                # 数据生成异常
+# jwt 相关
+JWT_CREATE_ERROR = 1101                 # jwt 生成异常
+JWT_PARSE_ERROR = 1102                  # jwt 解析异常
+# 用户相关
+USER_NO_LOGIN = 1200                    # 用户未登录
+USER_LOGOUT = 1201                      # 用户登出

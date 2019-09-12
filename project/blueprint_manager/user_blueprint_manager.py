@@ -26,6 +26,11 @@ def user_login():
     return UserModul(request).login()
 
 
+@user.route('/refresh_login_status', methods=["POST"])
+def user_refresh_login_status():
+    return UserModul(request).refresh_login_status()
+
+
 @user.route("/logout", methods=['GET'])
 def user_logout():
     return UserModul(request).logout()
