@@ -86,6 +86,7 @@ def app_before_request():
 # 全局异常处理
 @app.errorhandler(Exception)
 def global_exception_handler(exp):
+    # 获取请求中的参数，以判断哪个链接的哪个位置有 bug
     try:
         req_args = request.args.to_dict()
     except Exception as e:
@@ -98,16 +99,23 @@ def global_exception_handler(exp):
         req_json = request.json
     except Exception as e:
         req_json = {"ERROR": str(e)}
+    try:
+        req_data = "having data" if bool(request.get_data()) else "not any data"
+    except Exception as e:
+        req_data = {"ERROR": str(e)}
+    # 记录异常信息
     app.logger.error("Exception => " + str(exp) +
                      "\n****** REQUEST DETAIL ******" +
-                     "\nurl:  " + request.url +
+                     "\nurl:  " + request.base_url +
                      "\nargs: " + str(req_args) +
                      "\nform: " + str(req_form) +
                      "\njson: " + str(req_json) +
+                     "\ndata: " + str(req_data) +
                      "\n****************************"
                      )
     if isinstance(exp, HTTPException):
         return common_return(code=http_response_code.EXCEPTION_ERROR, isSuccess=False, msg="HTTP Exception")
     else:
+        # 若果不是 HTTPException 异常，则记录具体的异常信息
         app.logger.exception(exp)
         return common_return(code=http_response_code.EXCEPTION_ERROR, isSuccess=False, msg="Exception")
