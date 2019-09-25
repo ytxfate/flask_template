@@ -26,7 +26,7 @@ class FileUpload:
     
     def upload_file(self):
         """
-        下载文件
+        上传文件
         """
         ret_obj = {"UploadStatus": "false"}
         file = self.request.files.get("file")

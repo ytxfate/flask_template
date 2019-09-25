@@ -18,6 +18,7 @@ class OperateRedis:
     操作 Redis 数据库
     """
     def __init__(self):
+        # 根据 isFormalSystem 判断连接哪个 redis 数据库
         if isFormalSystem:
             self.Redis_config = Redis_config
         else:

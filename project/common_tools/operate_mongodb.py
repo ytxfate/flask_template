@@ -18,6 +18,7 @@ class OperateMongodb:
     MongoDB 数据库操作
     """
     def __init__(self):
+        # 根据 isFormalSystem 判断连接哪个 mongo 数据库
         if isFormalSystem:
             self.MongoDB_config = MongoDB_config
         else:
