@@ -109,4 +109,5 @@ def global_exception_handler(exp):
     if isinstance(exp, HTTPException):
         return common_return(code=http_response_code.EXCEPTION_ERROR, isSuccess=False, msg="HTTP Exception")
     else:
+        app.logger.exception(exp)
         return common_return(code=http_response_code.EXCEPTION_ERROR, isSuccess=False, msg="Exception")
