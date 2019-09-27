@@ -33,12 +33,15 @@ class OperateRedis:
         if self.Redis_config['AUTH'] is True:
             pool = redis.ConnectionPool(
                 host=self.Redis_config['HOST'],
-                port=self.Redis_config['PORT']
+                port=self.Redis_config['PORT'],
+                password=self.Redis_config['PASSWORD'],
+                decode_responses=self.Redis_config['DECODE_RESPONSES']
             )
         else:
             pool = redis.ConnectionPool(
                 host=self.Redis_config['HOST'],
                 port=self.Redis_config['PORT'],
-                password=self.Redis_config['PASSWORD'])
-        conn = redis.Redis(connection_pool=pool, decode_responses=self.Redis_config['DECODE_RESPONSES'])
+                decode_responses=self.Redis_config['DECODE_RESPONSES']
+            )
+        conn = redis.Redis(connection_pool=pool)
         return conn
