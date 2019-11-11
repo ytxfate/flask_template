@@ -100,7 +100,8 @@ class JWTAuth:
         try:
             jwt_payload = jwt.decode(
                 jwt_body.encode(encoding='utf-8'),
-                self.secret_key
+                self.secret_key,
+                options={'verify_exp': False}
             )
             if jwt_payload and 'data' in jwt_payload:
                 user_info = jwt_payload['data']

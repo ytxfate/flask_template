@@ -65,9 +65,12 @@ for bp in BLUEPRINT_LIST:
 def app_before_request():
     # 按要求拦截请求
     req_path = request.path
-    if any([
-        ('user/refresh_login_status' in req_path),
-        ('user/logout' in req_path)
+    if 'user/refresh_login_status' in req_path:
+        jwt_str = request.headers.get('Authorization')
+        if not jwt_str:
+            return common_return(code=http_response_code.USER_NO_LOGIN, isSuccess=False, msg="请登录")
+    elif any([
+        ('/user/' in req_path and 'login' not in req_path)
     ]):
         # 拦截器进行用户认证，认证完成后将相关数据放到 flask 当前应用环境的通用变量 g 中，
         # 后续模块可以通过 g 对象来获取设置在其中的数据，
