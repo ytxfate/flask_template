@@ -8,6 +8,7 @@
 
 # The Python Standard Modules(Library) and Third Modules(Library)
 import redis
+import threading
 
 # User-defined Modules
 from global_config import Redis_config, Redis_config_test, isFormalSystem
@@ -17,12 +18,21 @@ class OperateRedis:
     """
     操作 Redis 数据库
     """
+    _instance_lock = threading.Lock()
+
     def __init__(self):
         # 根据 isFormalSystem 判断连接哪个 redis 数据库
         if isFormalSystem:
             self.Redis_config = Redis_config
         else:
             self.Redis_config = Redis_config_test
+    
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, '_instance'):
+            with OperateRedis._instance_lock:
+                if not hasattr(cls, '_instance'):
+                    OperateRedis._instance = super().__new__(cls)
+        return OperateRedis._instance
     
     def conn_redis(self):
         """

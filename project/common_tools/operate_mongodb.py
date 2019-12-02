@@ -8,6 +8,7 @@
 
 # The Python Standard Modules(Library) and Third Modules(Library)
 import pymongo
+import threading
 
 # User-defined Modules
 from global_config import MongoDB_config, MongoDB_config_test, isFormalSystem
@@ -17,12 +18,24 @@ class OperateMongodb:
     """
     MongoDB 数据库操作
     """
+    _instance_lock = threading.Lock()
+
     def __init__(self):
         # 根据 isFormalSystem 判断连接哪个 mongo 数据库
         if isFormalSystem:
             self.MongoDB_config = MongoDB_config
         else:
             self.MongoDB_config = MongoDB_config_test
+    
+    def __new__(cls, *args, **kwargs):
+        """
+        实现单例模式
+        """
+        if not hasattr(cls, '._instance'):
+            with OperateMongodb._instance_lock:
+                if not hasattr(cls, '._instance'):
+                    OperateMongodb._instance = super().__new__(cls)
+        return OperateMongodb._instance
     
     def conn_mongodb(self):
         """
