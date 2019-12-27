@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  check_and_handle_request_param.py
+@File :  handle_req_param.py
 @Desc :  检查及处理 request 请求参数
 '''
 
@@ -11,13 +11,13 @@ import re
 # User-defined Modules
 
 
-class CheckAndHandleRequestParam:
+class HandleReqParam:
     """
     检查及处理 request 请求参数
         @param:
             request_dict :  request 请求的参数及值
     """
-    def __init__(self, request_dict):
+    def __init__(self, request_dict: dict):
         self.request_dict = request_dict
     
     def __remove_spaces(self):
@@ -28,7 +28,7 @@ class CheckAndHandleRequestParam:
             if isinstance(val, str):
                 self.request_dict[key] = val.strip()
 
-    def __check_param_must_keys(self, must_need_keys):
+    def __check_required_keys(self, must_need_keys: list):
         """
         检查必要参数是否不全或为空
             @param:
@@ -54,7 +54,7 @@ class CheckAndHandleRequestParam:
             return False
         return True
 
-    def __check_param_can_change_keys(self, can_change_keys):
+    def __check_param_can_change_keys(self, can_change_keys: list):
         """
         检查请求的所有参数是否都在允许修改的 keys 中
             @param:
@@ -69,7 +69,7 @@ class CheckAndHandleRequestParam:
                 return False
         return True
 
-    def __support_regex_choose(self, need_regexp_keys):
+    def __support_regex_choose(self, need_regexp_keys: list):
         """
         对部分需要进行模糊匹配的字段进行处理
             @param:
@@ -79,14 +79,15 @@ class CheckAndHandleRequestParam:
             if key in need_regexp_keys:
                 self.request_dict[key] = re.compile(value)
     
-    def main_contraller(self, remove_spaces=True, must_need_keys=[], can_change_keys=[], need_regexp_keys=[]):
+    def main_contraller(self, rm_spaces: bool=True, required_keys: list=[],
+                            allow_keys: list=[], regexp_keys: list=[]):
         """
         主控制器
             @param:
-                remove_spaces    :  是否去除 str 首尾的空格
-                must_need_keys   :  检查必要参数是否不全或为空
-                can_change_keys  :  检查请求的所有参数是否都在允许修改的 keys 中
-                need_regexp_keys :  对部分需要进行模糊匹配的字段进行处理
+                rm_spaces       :  是否去除 str 首尾的空格
+                required_keys   :  检查必要参数是否不全或为空
+                allow_keys      :  检查请求的所有参数是否都在允许修改的 keys 中
+                regexp_keys     :  对部分需要进行模糊匹配的字段进行处理
             @return: tuple(check_status_imp, check_status_can, request_dict)
                 check_status     : 必要参数 及 允许修改参数 检查结果
                                     if return is False,the parameters is check fail,
@@ -97,16 +98,17 @@ class CheckAndHandleRequestParam:
         check_status_can = False
         check_status = False
         # 去空
-        if remove_spaces:
+        if rm_spaces:
             self.__remove_spaces()
         # 检查必要参数是否不全或为空
-        if must_need_keys:
-            check_status_imp = self.__check_param_must_keys(must_need_keys)
-        if can_change_keys:
-            check_status_can = self.__check_param_can_change_keys(can_change_keys)
-        if need_regexp_keys:
-            self.__support_regex_choose(need_regexp_keys)
+        if required_keys:
+            check_status_imp = self.__check_required_keys(required_keys)
+        if allow_keys:
+            check_status_can = self.__check_param_can_change_keys(allow_keys)
+        if regexp_keys:
+            self.__support_regex_choose(regexp_keys)
         # 判断检查的结果
-        if (bool(must_need_keys) is check_status_imp) and (bool(can_change_keys) is check_status_can):
+        if ((bool(required_keys) is check_status_imp) and
+                    (bool(allow_keys) is check_status_can)):
             check_status = True
         return (check_status, self.request_dict)

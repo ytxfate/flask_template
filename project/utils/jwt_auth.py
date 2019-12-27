@@ -11,10 +11,11 @@ import datetime
 import time
 import jwt
 import hashlib
-
+import logging
 # User-defined Modules
-from global_config import SECRET_KEY as flask_secret_key
+from ..config.sys_config import SECRET_KEY as flask_secret_key
 
+logger = logging.getLogger(__name__)
 
 class JWTAuth:
     """
@@ -53,15 +54,21 @@ class JWTAuth:
         try:
             payload = {
                 'exp': time.mktime((
-                    datetime.datetime.now() + datetime.timedelta(minutes=validity_period)
-                ).timetuple()),    # 过期时间
-                'iat': time.mktime(datetime.datetime.now().timetuple()),    # 发行时间
+                        datetime.datetime.now() +
+                        datetime.timedelta(minutes=validity_period)
+                    ).timetuple()),    # 过期时间
+                'iat': time.mktime(
+                    datetime.datetime.now().timetuple()), # 发行时间
                 'iss': 'hsd',   # token签发者
                 'data': user_info
             }
-            jwt_body = jwt.encode(payload, self.secret_key, algorithm='HS256').decode(encoding='utf-8')
+            jwt_body = jwt.encode(
+                payload,
+                self.secret_key,
+                algorithm='HS256'
+            ).decode(encoding='utf-8')
         except Exception as e:
-            pass
+            logger.exception(e)
         return jwt_body
     
     def decode_jwt(self, jwt_body):
@@ -85,7 +92,7 @@ class JWTAuth:
                 user_info = jwt_payload['data']
                 decode_status = True
         except Exception as e:
-            pass
+            logger.exception(e)
         return decode_status, user_info
     
     def decode_jwt_without_check(self, jwt_body):
@@ -106,10 +113,11 @@ class JWTAuth:
             if jwt_payload and 'data' in jwt_payload:
                 user_info = jwt_payload['data']
         except Exception as e:
-            pass
+            logger.exception(e)
         return user_info
     
-    def create_jwt_and_refresh_jwt(self, user_info, validity_period=VALIDITY_PERIOD):
+    def create_jwt_and_refresh_jwt(self,
+                user_info, validity_period=VALIDITY_PERIOD):
         """
         生成 jwt 及 refresh_jwt 信息
             @param:
@@ -123,9 +131,10 @@ class JWTAuth:
         jwt = refresh_jwt = None
         create_status = False
         # 最多循环 5 次，否则生成失败
-        for i in range(5):
+        for _ in range(5):
             jwt = self.__encode_jwt(user_info,validity_period=validity_period)
-            refresh_jwt = self.__encode_jwt({}, validity_period=validity_period*2)
+            refresh_jwt = self.__encode_jwt(
+                {}, validity_period=validity_period*2)
             if jwt and refresh_jwt:
                 create_status = True
                 break

@@ -10,14 +10,9 @@
 from flask import Blueprint, request
 
 # User-defined Modules
-from project.modules.file_upload_download.file_upload import FileUpload
-from project.modules.file_upload_download.file_download import FileDownload
-from project.common_tools.operate_mongodb import OperateMongodb
-from project.common_tools.operate_redis import OperateRedis
+from ..modules.file_upload_download.file_download import FileDownload
+from ..modules.file_upload_download.file_upload import FileUpload
 
-
-conn_mongo, db_mongo = OperateMongodb().conn_mongodb()
-conn_redis = OperateRedis().conn_redis()
 
 file = Blueprint("file", __name__)
 

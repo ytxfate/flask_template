@@ -7,13 +7,13 @@
 '''
 
 # The Python Standard Modules(Library) and Third Modules(Library)
-from flask import jsonify, send_from_directory, send_file
+from flask import send_from_directory, send_file
 import os
 import csv
 import io
-
 # User-defined Modules
-
+from project.utils.comm_ret import comm_ret
+from project.utils import resp_code
 
 # 下载文件存储路径
 DOWNLOAD_FILE_PATH = "./file/download/"
@@ -24,16 +24,20 @@ class FileDownload:
         self.request = request
     
     def download_file(self):
-        ret_obj = {"DownloadStatus": "false"}
-        if self.request.json and 'file_name' in self.request.json and self.request.json['file_name']:
+        req_json = self.request.json
+        if (req_json and 'file_name' in req_json and req_json['file_name']):
             # 判断文件是否存在
-            if os.path.isfile(os.path.join(DOWNLOAD_FILE_PATH, self.request.json['file_name'])):
-                return send_from_directory(DOWNLOAD_FILE_PATH, self.request.json['file_name'], as_attachment=True)
+            if os.path.isfile(os.path.join(
+                    DOWNLOAD_FILE_PATH, req_json['file_name'])):
+                return send_from_directory(
+                    DOWNLOAD_FILE_PATH,
+                    req_json['file_name'],
+                    as_attachment=True)
             else:
-                ret_obj = {"DownloadStatus": "false", 'msg': 'no such file!'}
+                return comm_ret(
+                    code=resp_code.FILE_NOT_FOUND, msg='no such file!')
         else:
-            ret_obj = {"DownloadStatus": "false", 'msg': 'no such file!'}
-        return jsonify(ret_obj)
+            return comm_ret(code=resp_code.FILE_NOT_FOUND, msg='no such file!')
     
     def download_file_use_stream(self):
         csv_data = [
@@ -50,4 +54,6 @@ class FileDownload:
         # Change stream position
         mem.seek(0)
         io_stream.close()
-        return send_file(mem, as_attachment=True, attachment_filename='年度计划.csv', mimetype='text/csv')
+        return send_file(mem, as_attachment=True,
+                        attachment_filename='年度计划.csv',
+                        mimetype='text/csv')

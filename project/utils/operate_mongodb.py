@@ -11,8 +11,8 @@ import pymongo
 import threading
 
 # User-defined Modules
-from global_config import MongoDB_config, MongoDB_config_test, isFormalSystem
-
+from ..config.db_config import MONGODB_CONF, MONGODB_CONF_T
+from ..config.sys_config import isFormalSystem
 
 class OperateMongodb:
     """
@@ -23,9 +23,9 @@ class OperateMongodb:
     def __init__(self):
         # 根据 isFormalSystem 判断连接哪个 mongo 数据库
         if isFormalSystem:
-            self.MongoDB_config = MongoDB_config
+            self.MONGO_CONF = MONGODB_CONF
         else:
-            self.MongoDB_config = MongoDB_config_test
+            self.MONGO_CONF = MONGODB_CONF_T
     
     def __new__(cls, *args, **kwargs):
         """
@@ -43,11 +43,13 @@ class OperateMongodb:
             @return:
                 mongo_connection and mongo_database
         """
-        if 'URL' in self.MongoDB_config and self.MongoDB_config['URL'] != '':
-            conn = pymongo.MongoClient(host=self.MongoDB_config['URL'])
+        if 'URL' in self.MONGO_CONF and self.MONGO_CONF['URL'] != '':
+            conn = pymongo.MongoClient(host=self.MONGO_CONF['URL'])
         else:
-            conn = pymongo.MongoClient(host=self.MongoDB_config['HOST'], port=self.MongoDB_config['PORT'])
-        db = conn.get_database(self.MongoDB_config['DEFAULT_DB'])
-        if self.MongoDB_config['AUTH'] is True:
-            db.authenticate(self.MongoDB_config['USERNAME'], self.MongoDB_config['PASSWORD'])
+            conn = pymongo.MongoClient(
+                host=self.MONGO_CONF['HOST'], port=self.MONGO_CONF['PORT'])
+        db = conn.get_database(self.MONGO_CONF['DEFAULT_DB'])
+        if self.MONGO_CONF['AUTH'] is True:
+            db.authenticate(
+                self.MONGO_CONF['USERNAME'], self.MONGO_CONF['PASSWORD'])
         return conn, db

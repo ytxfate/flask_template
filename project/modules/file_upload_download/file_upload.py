@@ -14,7 +14,8 @@ import time
 from pypinyin import lazy_pinyin
 
 # User-defined Modules
-
+from project.utils.comm_ret import comm_ret
+from project.utils import resp_code
 
 # 上传文件存储路径
 UPLOAD_FILE_PATH = "./file/upload/"
@@ -28,7 +29,6 @@ class FileUpload:
         """
         上传文件
         """
-        ret_obj = {"UploadStatus": "false"}
         file = self.request.files.get("file")
         if file and file.filename != "":
             # 使用 secure_filename 格式化文件名称
@@ -40,7 +40,6 @@ class FileUpload:
             new_filename = str(int(time.time() * 1000)) + "." + file_end_with
             # 保存文件
             file.save(os.path.join(UPLOAD_FILE_PATH, new_filename))
-            ret_obj = {"UploadStatus": "true", "file_name": new_filename}
+            return comm_ret(msg='文件上传成功', resp={"file_name": new_filename})
         else:
-            ret_obj = {"UploadStatus": "false", "msg": "no file upload!"} 
-        return jsonify(ret_obj)
+            return comm_ret(msg='no file upload!')

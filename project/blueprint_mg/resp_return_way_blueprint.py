@@ -10,8 +10,7 @@
 from flask import Blueprint, request
 
 # User-defined Modules
-from project.modules.resp_return_way.resp_return_way import RespReturnWay
-
+from ..modules.resp_return_way.resp_return_way import RespReturnWay
 
 resp_return_way = Blueprint('resp_return_way', __name__)
 

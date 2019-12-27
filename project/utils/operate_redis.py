@@ -11,8 +11,8 @@ import redis
 import threading
 
 # User-defined Modules
-from global_config import Redis_config, Redis_config_test, isFormalSystem
-
+from ..config.db_config import REDIS_CONF, REDIS_CONF_T
+from ..config.sys_config import isFormalSystem
 
 class OperateRedis:
     """
@@ -23,9 +23,9 @@ class OperateRedis:
     def __init__(self):
         # 根据 isFormalSystem 判断连接哪个 redis 数据库
         if isFormalSystem:
-            self.Redis_config = Redis_config
+            self.REDIS_CONFIG = REDIS_CONF
         else:
-            self.Redis_config = Redis_config_test
+            self.REDIS_CONFIG = REDIS_CONF_T
     
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls, '_instance'):
@@ -40,18 +40,18 @@ class OperateRedis:
             @return:
                 redis_connection
         """
-        if self.Redis_config['AUTH'] is True:
+        if self.REDIS_CONFIG['AUTH'] is True:
             pool = redis.ConnectionPool(
-                host=self.Redis_config['HOST'],
-                port=self.Redis_config['PORT'],
-                password=self.Redis_config['PASSWORD'],
-                decode_responses=self.Redis_config['DECODE_RESPONSES']
+                host=self.REDIS_CONFIG['HOST'],
+                port=self.REDIS_CONFIG['PORT'],
+                password=self.REDIS_CONFIG['PASSWORD'],
+                decode_responses=self.REDIS_CONFIG['DECODE_RESPONSES']
             )
         else:
             pool = redis.ConnectionPool(
-                host=self.Redis_config['HOST'],
-                port=self.Redis_config['PORT'],
-                decode_responses=self.Redis_config['DECODE_RESPONSES']
+                host=self.REDIS_CONFIG['HOST'],
+                port=self.REDIS_CONFIG['PORT'],
+                decode_responses=self.REDIS_CONFIG['DECODE_RESPONSES']
             )
         conn = redis.Redis(connection_pool=pool)
         return conn

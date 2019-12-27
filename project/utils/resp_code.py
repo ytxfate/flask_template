@@ -2,14 +2,9 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  http_response_code.py
+@File :  resp_code.py
 @Desc :  自定义 response code
 '''
-
-# The Python Standard Modules(Library) and Third Modules(Library)
-
-# User-defined Modules
-
 
 # ===================  基本 HTTP response code  =================== #
 SUCCESS = 200                           # 成功

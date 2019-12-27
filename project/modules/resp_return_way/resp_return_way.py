@@ -11,8 +11,6 @@ from flask import jsonify, Response, make_response
 import json
 
 # User-defined Modules
-from project.common_tools.jwt_auth import JWTAuth
-from project.common_tools.common_return import common_return
 
 
 class RespReturnWay:
@@ -27,11 +25,13 @@ class RespReturnWay:
     
     def use_make_response(self):
         # 自己封装 response
-        resp = make_response(json.dumps({'way': "make_response"}, ensure_ascii=False))
+        resp = make_response(
+            json.dumps({'way': "make_response"}, ensure_ascii=False))
         resp.status = "201"
         resp.headers["content-type"] = "application/json"
         resp.headers["Authorization"] = "jwt_str"
-        return resp     # make_response 自己封装返回 json 格式数据，可同时设置 headers 相关值
+        return resp     # make_response 自己封装返回 json 格式数据，
+                        # 可同时设置 headers 相关值
     
     def use_response(self):
         return Response(

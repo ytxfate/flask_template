@@ -3,10 +3,5 @@
 
 '''
 @File :  __init__.py
-@Desc :  项目基本模块
+@Desc :  项目主目录
 '''
-
-# The Python Standard Modules(Library) and Third Modules(Library)
-
-# User-defined Modules
-
