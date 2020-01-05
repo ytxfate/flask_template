@@ -38,20 +38,16 @@ class HandleReqParam:
                 if return is False,the parameters is check fail,
                 if return is True,the parameters is check success
         """
-        if self.request_dict:
-            for must_key in must_need_keys:
-                if must_key in self.request_dict:
-                    # 参数类型为字符串时，值不能为空字符串
-                    if isinstance(self.request_dict[must_key], str):
-                        if self.request_dict[must_key].strip() == '':
-                            return False
-                    else:
-                        if self.request_dict[must_key] is None:
-                            return False
-                else:
+        for must_key in must_need_keys:
+            if must_key not in self.request_dict:
+                return False
+            # 参数类型为字符串时，值不能为空字符串
+            if isinstance(self.request_dict[must_key], str):
+                if self.request_dict[must_key].strip() == '':
                     return False
-        else:
-            return False
+            else:
+                if self.request_dict[must_key] is None:
+                    return False
         return True
 
     def __check_param_can_change_keys(self, can_change_keys: list):
@@ -94,6 +90,12 @@ class HandleReqParam:
                                     if return is True,the parameters is check success
                 request_dict     : 处理后的参数
         """
+        # request_dict 为空时直接返回 False
+        if not self.request_dict:
+            return (False, self.request_dict)
+        # request_dict 类型不对的直接返回 False
+        if not isinstance(self.request_dict, dict):
+            return False, self.request_dict
         check_status_imp = False
         check_status_can = False
         check_status = False
