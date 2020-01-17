@@ -84,7 +84,7 @@ class HandleReqParam:
                 required_keys   :  检查必要参数是否不全或为空
                 allow_keys      :  检查请求的所有参数是否都在允许修改的 keys 中
                 regexp_keys     :  对部分需要进行模糊匹配的字段进行处理
-            @return: tuple(check_status_imp, check_status_can, request_dict)
+            @return: tuple(check_status, request_dict)
                 check_status     : 必要参数 及 允许修改参数 检查结果
                                     if return is False,the parameters is check fail,
                                     if return is True,the parameters is check success
