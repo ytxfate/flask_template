@@ -92,3 +92,18 @@ pip install --no-index -f ./ -r requirements.txt
     -f          : 已下载依赖库存放位置
     -r          : 指定 requirements.txt 文件
 ```
+
+### Nginx 配置
+```
+server {                                                                                        
+    listen       80;
+    server_name  localhost;
+    charset utf-8;
+
+    location /api {
+        uwsgi_pass 127.0.0.1:5000;
+        include uwsgi_params;
+    }
+}
+
+```
