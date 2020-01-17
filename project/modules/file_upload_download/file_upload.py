@@ -12,7 +12,7 @@ from werkzeug.utils import secure_filename
 import os
 import time
 from pypinyin import lazy_pinyin
-
+import flask
 # User-defined Modules
 from project.utils.comm_ret import comm_ret
 from project.utils import resp_code
@@ -22,7 +22,7 @@ UPLOAD_FILE_PATH = "./file/upload/"
 
 
 class FileUpload:
-    def __init__(self, request):
+    def __init__(self, request: flask.Request):
         self.request = request
     
     def upload_file(self):

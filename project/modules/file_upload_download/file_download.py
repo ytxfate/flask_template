@@ -11,6 +11,7 @@ from flask import send_from_directory, send_file
 import os
 import csv
 import io
+import flask
 # User-defined Modules
 from project.utils.comm_ret import comm_ret
 from project.utils import resp_code
@@ -20,7 +21,7 @@ DOWNLOAD_FILE_PATH = "./file/download/"
 
 
 class FileDownload:
-    def __init__(self, request):
+    def __init__(self, request: flask.Request):
         self.request = request
     
     def download_file(self):

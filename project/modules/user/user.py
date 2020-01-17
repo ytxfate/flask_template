@@ -10,7 +10,7 @@
 from flask import jsonify, Response, make_response, g
 import json
 import copy
-
+import flask
 # User-defined Modules
 from project.utils.jwt_auth import JWTAuth
 from project.utils.comm_ret import comm_ret
@@ -21,7 +21,7 @@ class UserModul:
     """
     用户模块
     """
-    def __init__(self, request):
+    def __init__(self, request: flask.Request):
         self.request = request
 
     def login(self):

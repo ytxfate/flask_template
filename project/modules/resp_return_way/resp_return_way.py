@@ -9,7 +9,7 @@
 # The Python Standard Modules(Library) and Third Modules(Library)
 from flask import jsonify, Response, make_response
 import json
-
+import flask
 # User-defined Modules
 
 
@@ -17,7 +17,7 @@ class RespReturnWay:
     """
     用户模块
     """
-    def __init__(self, request):
+    def __init__(self, request: flask.Request):
         self.request = request
 
     def use_jsonify(self):
