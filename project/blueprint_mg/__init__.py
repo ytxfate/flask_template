@@ -9,7 +9,7 @@
 # The Python Standard Modules(Library) and Third Modules(Library)
 
 # User-defined Modules
-from ..app import app
+from project.app import app
 
 
 root_url = '/api'   # 当服务器使用 nginx 做反向代理的时候

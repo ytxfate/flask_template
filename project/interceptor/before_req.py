@@ -9,10 +9,10 @@
 # The Python Standard Modules(Library) and Third Modules(Library)
 from flask import request, g
 # User-defined Modules
-from ..app import app
-from ..utils.comm_ret import comm_ret
-from ..utils import resp_code
-from ..utils.jwt_auth import JWTAuth
+from project.app import app
+from project.utils.comm_ret import comm_ret
+from project.utils import resp_code
+from project.utils.jwt_auth import JWTAuth
 
 
 @app.before_request

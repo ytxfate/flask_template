@@ -11,8 +11,8 @@ import pymongo
 import threading
 
 # User-defined Modules
-from ..config.db_config import MONGODB_CONF, MONGODB_CONF_T
-from ..config.sys_config import isFormalSystem
+from project.config.db_config import MONGODB_CONF, MONGODB_CONF_T
+from project.config.sys_config import isFormalSystem
 
 class OperateMongodb:
     """

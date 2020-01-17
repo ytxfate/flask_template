@@ -11,9 +11,9 @@ from flask import request
 from werkzeug.exceptions import HTTPException
 import logging
 # User-defined Modules
-from ..app import app
-from ..utils.comm_ret import comm_ret
-from ..utils import resp_code
+from project.app import app
+from project.utils.comm_ret import comm_ret
+from project.utils import resp_code
 
 logger = logging.getLogger('exception')
 

@@ -11,8 +11,8 @@ import redis
 import threading
 
 # User-defined Modules
-from ..config.db_config import REDIS_CONF, REDIS_CONF_T
-from ..config.sys_config import isFormalSystem
+from project.config.db_config import REDIS_CONF, REDIS_CONF_T
+from project.config.sys_config import isFormalSystem
 
 class OperateRedis:
     """

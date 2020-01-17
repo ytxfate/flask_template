@@ -10,8 +10,8 @@
 from flask import Blueprint, request
 
 # User-defined Modules
-from ..modules.file_upload_download.file_download import FileDownload
-from ..modules.file_upload_download.file_upload import FileUpload
+from project.modules.file_upload_download.file_download import FileDownload
+from project.modules.file_upload_download.file_upload import FileUpload
 
 
 file = Blueprint("file", __name__)

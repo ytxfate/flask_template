@@ -9,7 +9,7 @@
 # The Python Standard Modules(Library) and Third Modules(Library)
 from flask import jsonify
 # User-defined Modules
-from ..utils.resp_code import SUCCESS
+from project.utils.resp_code import SUCCESS
 
 def comm_ret(code: int=SUCCESS, isSuccess: bool=True,
                     msg: str="请求成功", resp: object={}):

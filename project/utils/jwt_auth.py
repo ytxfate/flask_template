@@ -13,7 +13,7 @@ import jwt
 import hashlib
 import logging
 # User-defined Modules
-from ..config.sys_config import SECRET_KEY as flask_secret_key
+from project.config.sys_config import SECRET_KEY as flask_secret_key
 
 logger = logging.getLogger(__name__)
 

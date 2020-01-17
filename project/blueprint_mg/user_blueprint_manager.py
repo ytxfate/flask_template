@@ -10,7 +10,7 @@
 from flask import Blueprint, request
 
 # User-defined Modules
-from ..modules.user.user import UserModul
+from project.modules.user.user import UserModul
 
 user = Blueprint("user", __name__)
 
