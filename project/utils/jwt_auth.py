@@ -12,6 +12,7 @@ import time
 import jwt
 import hashlib
 import logging
+from typing import Union, Tuple
 # User-defined Modules
 from project.config.sys_config import SECRET_KEY as flask_secret_key
 
@@ -25,8 +26,8 @@ class JWTAuth:
     def __init__(self):
         # 对 falsk secret_key 进行二次处理，用于 jwt 加密
         self.secret_key = self.encrypt_md5(flask_secret_key)
-    
-    def encrypt_md5(self, encrypt_str):
+
+    def encrypt_md5(self, encrypt_str: Union[str, bytes]) -> str:
         """
         md5 加密
             @param:
@@ -41,7 +42,8 @@ class JWTAuth:
         m.update(encrypt_str)
         return m.hexdigest()
 
-    def __encode_jwt(self, user_info, validity_period=VALIDITY_PERIOD):
+    def __encode_jwt(self, user_info: object,
+                validity_period: int=VALIDITY_PERIOD) -> str:
         """
         生成 jwt 认证信息
             @param:
@@ -71,7 +73,7 @@ class JWTAuth:
             logger.exception(e)
         return jwt_body
     
-    def decode_jwt(self, jwt_body):
+    def decode_jwt(self, jwt_body: str) -> Tuple[bool, object]:
         """
         解析 jwt 认证信息
             @param:
@@ -95,7 +97,7 @@ class JWTAuth:
             logger.exception(e)
         return decode_status, user_info
     
-    def decode_jwt_without_check(self, jwt_body):
+    def decode_jwt_without_check(self, jwt_body: str) -> object:
         """
         解析 jwt 认证信息，不验证 jwt_body 时效性
             @param:
@@ -116,8 +118,8 @@ class JWTAuth:
             logger.exception(e)
         return user_info
     
-    def create_jwt_and_refresh_jwt(self,
-                user_info, validity_period=VALIDITY_PERIOD):
+    def create_jwt_and_refresh_jwt(self, user_info: object,
+                validity_period: str=VALIDITY_PERIOD) -> Tuple[bool, str, str]:
         """
         生成 jwt 及 refresh_jwt 信息
             @param:
