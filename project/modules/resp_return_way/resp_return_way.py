@@ -14,12 +14,6 @@ import flask
 
 
 class RespReturnWay:
-    """
-    用户模块
-    """
-    def __init__(self, request: flask.Request):
-        self.request = request
-
     def use_jsonify(self):
         return jsonify({'way': 'jsonify'})
     

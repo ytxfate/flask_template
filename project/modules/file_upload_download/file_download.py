@@ -7,7 +7,7 @@
 '''
 
 # The Python Standard Modules(Library) and Third Modules(Library)
-from flask import send_from_directory, send_file
+from flask import send_from_directory, send_file, request
 import os
 import csv
 import io
@@ -21,11 +21,8 @@ DOWNLOAD_FILE_PATH = "./file/download/"
 
 
 class FileDownload:
-    def __init__(self, request: flask.Request):
-        self.request = request
-    
     def download_file(self):
-        req_json = self.request.json
+        req_json = request.json
         if (req_json and 'file_name' in req_json and req_json['file_name']):
             # 判断文件是否存在
             if os.path.isfile(os.path.join(

@@ -7,7 +7,7 @@
 '''
 
 # The Python Standard Modules(Library) and Third Modules(Library)
-from flask import Blueprint, request
+from flask import Blueprint
 
 # User-defined Modules
 from project.modules.resp_return_way.resp_return_way import RespReturnWay
@@ -16,12 +16,12 @@ resp_return_way = Blueprint('resp_return_way', __name__)
 
 @resp_return_way.route('use_jsonify', methods=['GET', 'POST'])
 def resp_return_way_use_jsonify():
-    return RespReturnWay(request).use_jsonify()
+    return RespReturnWay().use_jsonify()
 
 @resp_return_way.route('use_make_response', methods=['GET', 'POST'])
 def resp_return_way_use_make_response():
-    return RespReturnWay(request).use_make_response()
+    return RespReturnWay().use_make_response()
 
 @resp_return_way.route('use_response', methods=['GET', 'POST'])
 def resp_return_way_use_response():
-    return RespReturnWay(request).use_response()
+    return RespReturnWay().use_response()

@@ -10,8 +10,3 @@
     request.form ==> werkzeug.datastructures.ImmutableMultiDict
     request.data ==> bytes
 '''
-
-# The Python Standard Modules(Library) and Third Modules(Library)
-
-# User-defined Modules
-

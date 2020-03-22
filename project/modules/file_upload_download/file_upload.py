@@ -7,7 +7,7 @@
 '''
 
 # The Python Standard Modules(Library) and Third Modules(Library)
-from flask import jsonify
+from flask import jsonify, request
 from werkzeug.utils import secure_filename
 import os
 import time
@@ -22,14 +22,11 @@ UPLOAD_FILE_PATH = "./file/upload/"
 
 
 class FileUpload:
-    def __init__(self, request: flask.Request):
-        self.request = request
-    
     def upload_file(self):
         """
         上传文件
         """
-        file = self.request.files.get("file")
+        file = request.files.get("file")
         if file and file.filename != "":
             # 使用 secure_filename 格式化文件名称
             # lazy_pinyin 用于解决中文文件名的文件
