@@ -10,6 +10,7 @@
 from flask import request
 from werkzeug.exceptions import HTTPException
 import logging
+from pydantic import ValidationError
 # User-defined Modules
 from project.app import app
 from project.utils.comm_ret import comm_ret
@@ -49,6 +50,8 @@ def global_exception_handler(exp):
     if isinstance(exp, HTTPException):
         return comm_ret(code=resp_code.EXCEPTION_ERROR,
                         isSuccess=False, msg="HTTP Exception")
+    elif isinstance(exp, ValidationError):
+        return comm_ret(code=resp_code.PARAMETER_ERROR, msg="请求参数异常")
     else:
         # 若果不是 HTTPException 异常，则记录具体的异常信息
         logger.exception(exp)
