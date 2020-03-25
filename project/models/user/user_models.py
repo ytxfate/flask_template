@@ -7,18 +7,19 @@
 '''
 
 # The Python Standard Modules(Library) and Third Modules(Library)
-from pydantic import BaseModel
+
 # User-defined Modules
+from project.models.proj_base_model import ProjectBaseModel
 
 
-class LoginInfoModel(BaseModel):
+class LoginInfoModel(ProjectBaseModel):
     """
     用户登录模型
     """
     username: str
     password: str
 
-class RefreshJWTModel(BaseModel):
+class RefreshJWTModel(ProjectBaseModel):
     """
     刷新 JWT 信息
     """
