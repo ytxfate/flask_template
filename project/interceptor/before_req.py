@@ -38,4 +38,4 @@ def app_before_request():
             # print(g.user_info)
         else:
             # 跳转到登录页面
-            return comm_ret(code=resp_code.USER_NO_LOGIN, msg="请登录")
+            return comm_ret(code=resp_code.JWT_PARSE_ERROR, msg="请刷新Token信息")
