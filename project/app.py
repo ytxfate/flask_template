@@ -34,8 +34,21 @@ dictConfig({
     }
 })
 
+# json 序列化处理
+from flask.json import JSONEncoder as f_JSONEncoder
+from datetime import date, datetime
+class JSONEncoder(f_JSONEncoder):
+    def default(self, o):   # pylint: disable=E0202
+        if isinstance(o, datetime):
+            return o.strftime('%Y-%m-%d %H:%M:%S')
+        if isinstance(o, date):
+            return o.strftime('%Y-%m-%d')
+        return super(JSONEncoder, self).default(o)
+
 
 app = Flask(__name__)
+# json 序列化处理
+app.json_encoder = JSONEncoder
 # 密钥
 app.secret_key = SECRET_KEY
 # 跨域解决方案
