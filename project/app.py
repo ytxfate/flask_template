@@ -55,7 +55,7 @@ app.secret_key = SECRET_KEY
 flask_cors.CORS(app, supports_credentials=True)
 
 # 注册蓝图
-import project.blueprint_mg
+import project.blueprint_mg.blueprint_mg
 
 # 拦截器 及 全局异常处理
 import project.interceptor.before_req
