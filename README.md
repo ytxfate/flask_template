@@ -2,40 +2,45 @@
 ## Flask 开发模板
 
 ### 目录说明
+
 ```
-|-- main.py     --> 项目启动文件
-|-- project     --> 项目入口
-    |-- app.py      --> 项目基本设置、蓝图全局注册、全局拦截器、全局异常处理等
-    |-- config      --> 项目配置文件目录
-        |-- sys_config.py       --> 项目系统配置文件
-        |-- db_config.py        --> 项目数据库连接配置文件
-    |-- blueprint_mg        --> 项目蓝图管理目录
-        |-- __init__.py     --> 蓝图注册模块
-        |-- file_upload_download.py     --> 文件上传下载 模块蓝图管理（示例）
-        |-- resp_return_way_blueprint.py        --> response 返回方式 模块蓝图管理（示例）
-        |-- user_blueprint_manager.py       --> user 模块蓝图管理（示例）
-    |-- interceptor     --> 拦截器配置目录
-        |-- before_req.py       --> 请求拦截器
-        |-- global_exception_handler.py     --> 全局异常处理
-    |-- modules     --> 项目模块管理
-        |-- user        --> user 模块开发（示例）
-            |-- user.py     --> user 具体模块开发（示例）
-        |-- file_upload_download        --> 文件模块（示例）
-            |-- file_download.py        --> 文件下载模块（示例）
-            |-- file_upload.py      --> 文件上传模块（示例）
-        |-- resp_return_way     --> response 返回方式模块（示例）
-            |-- resp_return_way.py      --> response 返回方式模块（示例）
-    |--utils        --> 工具目录
-        |-- operate_mongodb.py      --> MongoDB 数据库操作（实例）
-        |-- operate_redis.py        --> Redis 数据库操作（实例）
-        |-- handle_req_param.py     --> 检查及处理 request 请求参数
-        |-- comm_ret.py     --> 统一 response 封装
-        |-- resp_code.py        --> response 状态码  （其他状态码可自行根据开发需要添加添加）
-        |-- jwt_auth.py     --> JWT 编码 及 解码
-|-- file        --> 上传下载文件放置目录
-    |-- download        --> 下载文件放置目录
-    |-- upload      --> 上传文件放置目录
-|-- uwsgi.ini       --> uwsgi 启动配置文件
+├── file										上传下载文件放置目录
+│   ├── download								下载文件放置目录
+│   └── upload									上传文件放置目录
+├── main.py										项目启动文件
+├── project										项目入口
+│   ├── app.py									项目基本设置
+│   ├── blueprint_mg							项目蓝图管理目录
+│   │   ├── blueprint_mg.py						蓝图注册模块
+│   ├── config									项目配置文件目录
+│   │   ├── db_config.py						项目数据库连接配置文件
+│   │   └── sys_config.py						项目系统配置文件
+│   ├── interceptor								拦截器配置目录
+│   │   ├── before_req.py						请求拦截器
+│   │   ├── global_exception_handler.py			全局异常处理
+│   ├── models									模型
+│   │   ├── com_models.py						公共模型
+│   │   ├── proj_base_model.py					基本模型
+│   │   └── user								用户模块相关模型
+│   │       └── user_models.py					用户模型
+│   ├── modules									项目模块管理
+│   │   ├── file_upload_download				文件模块（示例）
+│   │   │   ├── file_download.py				文件下载模块（示例）
+│   │   │   ├── file_upload.py					文件上传模块（示例）
+│   │   ├── __init__.py
+│   │   ├── resp_return_way						response 返回方式模块（示例）
+│   │   │   └── resp_return_way.py				response 返回方式模块（示例）
+│   │   └── user								user 模块开发（示例）
+│   │       └── user.py							user 具体模块开发（示例）
+│   └── utils									工具目录
+│       ├── comm_ret.py							统一 response 封装
+│       ├── handle_req_param.py					检查及处理 request 请求参数
+│       ├── jwt_auth.py							JWT 编码 及 解码
+│       ├── operate_mongodb.py					MongoDB 数据库操作（实例）
+│       ├── operate_redis.py					Redis 数据库操作（实例）
+│       └── resp_code.py						response 状态码  （其他状态码可自行根据开发需要添加添加）
+├── requirements.txt							项目依赖
+└── uwsgi.ini									uwsgi 启动配置文件
 ```
 
 ```
