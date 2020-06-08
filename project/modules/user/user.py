@@ -52,6 +52,9 @@ def refresh_login_status():
         return comm_ret(
                 code=resp_code.USER_NO_LOGIN, msg="刷新 jwt 失败，重新登录")
     user_info = JWTAuth().decode_jwt_without_check(jwt_str)
+    if not user_info:
+        return comm_ret(code=resp_code.USER_NO_LOGIN,
+                        msg="刷新 jwt 失败，重新登录")
     status, jwt_str, refresh_jwt_str = JWTAuth().create_jwt_and_refresh_jwt(
         user_info)
     if status is False:

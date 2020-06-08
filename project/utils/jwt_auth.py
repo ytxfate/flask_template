@@ -97,13 +97,13 @@ class JWTAuth:
             logger.exception(e)
         return decode_status, user_info
     
-    def decode_jwt_without_check(self, jwt_body: str) -> object:
+    def decode_jwt_without_check(self, jwt_body: str) -> dict:
         """
         解析 jwt 认证信息，不验证 jwt_body 时效性
             @param:
                 jwt_body: jwt 字串
             @return:
-                当 解析状态 为 True 时，解析成功；否则解析失败            
+                返回 jwt 存储的 信息, 若返回空字典则表示解析失败
         """
         user_info = {}
         try:
