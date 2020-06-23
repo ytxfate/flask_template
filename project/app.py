@@ -16,6 +16,16 @@ from flask import g
 # User-defined Modules
 from project.config.sys_config import SECRET_KEY
 
+'''
+# nginx 代理后获取真实ip地址
+from werkzeug.serving import WSGIRequestHandler
+def address_string(self):
+    # 这就是在nginx的config中，为什么一定要有X-Real-IP啦
+    return "[%s]-[%s]" % (self.headers.get('X-Forwarded-For', self.client_address[0]), self.headers.get('X-Real-Ip', self.client_address[0]))
+
+WSGIRequestHandler.address_string = address_string
+'''
+
 # 日志配置
 dictConfig({
     'version': 1,
