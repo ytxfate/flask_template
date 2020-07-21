@@ -13,6 +13,14 @@ app_run_conf = {
     "PORT": 5000,
     "DEBUG": True
 }
+# 接口前缀及版本控制
+__version = "v1.0"   # 版本, 若不需要则为空
+__base_prefix_path = '/api' # api 前缀
+
+prefix_api_path = '/{prefix}{version}'.format(
+    prefix=__base_prefix_path,
+    version=(("/" + __version) if __version else "")
+)
 # 密钥
 SECRET_KEY = "123"
 
@@ -20,3 +28,4 @@ SECRET_KEY = "123"
 # True : 生产系统
 # False: 测试系统
 isFormalSystem = False
+

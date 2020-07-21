@@ -10,11 +10,7 @@
 
 # User-defined Modules
 from project.app import app
-
-
-root_url = '/api'   # 当服务器使用 nginx 做反向代理的时候
-                    # 可修改 root_url 已便 nginx 拦截请求
-                    # 若不需要可以设置为空
+from project.config.sys_config import prefix_api_path as root_url
 
 
 """ 路由注册 """
