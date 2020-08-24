@@ -17,7 +17,7 @@ app_run_conf = {
 __version = "v1.0"   # 版本, 若不需要则为空
 __base_prefix_path = '/api' # api 前缀
 
-prefix_api_path = '/{prefix}{version}'.format(
+prefix_api_path = '{prefix}{version}'.format(
     prefix=__base_prefix_path,
     version=(("/" + __version) if __version else "")
 )

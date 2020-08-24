@@ -32,7 +32,7 @@ def app_before_request():
         # 当数据不存在时出现 '_AppCtxGlobals' object has no attribute 'xxx' 异常
         jwt_str = request.headers.get('Authorization')
         decode_status, user_info = JWTAuth().decode_jwt(jwt_str)
-        g.user_info = None
+        g.user_info = {}
         if decode_status:
             g.user_info = user_info
             # print(g.user_info)

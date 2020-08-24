@@ -38,25 +38,27 @@ def login():
     return comm_ret(resp={'jwt': jwt, 'refresh_jwt': refresh_jwt})
 
 
-@user_router.route('/refresh_login_status', methods=["POST"])
+@user_router.route('/refresh_login_status', methods=["GET"])
 def refresh_login_status():
     """
     刷新登录状态
     """
-    refresh_jwt = request.json.get('refresh_jwt')
+    refresh_jwt = request.args.get('refresh_jwt')
+    if not refresh_jwt:
+        return comm_ret(code=resp_code.PARAMETER_ERROR, msg="参数异常")
     jwt_str = request.headers.get('Authorization')
     # 采用 pydantic 进行参数验证
     _ = RefreshJWTModel(**{'jwt': jwt_str, 'refresh_jwt': refresh_jwt})
-    decode_status, _ = JWTAuth().decode_jwt(refresh_jwt)
+    decode_status, data = JWTAuth().decode_jwt_check_refresh_jwt(jwt_str,
+                                                                 refresh_jwt)
     if decode_status is False:
         return comm_ret(
                 code=resp_code.USER_NO_LOGIN, msg="刷新 jwt 失败，重新登录")
-    user_info = JWTAuth().decode_jwt_without_check(jwt_str)
-    if not user_info:
+    if not data:
         return comm_ret(code=resp_code.USER_NO_LOGIN,
                         msg="刷新 jwt 失败，重新登录")
     status, jwt_str, refresh_jwt_str = JWTAuth().create_jwt_and_refresh_jwt(
-        user_info)
+        data)
     if status is False:
         return comm_ret(
             code=resp_code.JWT_CREATE_ERROR, msg="JWT 信息生成异常")
