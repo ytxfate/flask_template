@@ -2,22 +2,24 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  blueprint_mg.py
+@File :  blueprint_mg.py  
 @Desc :  蓝图管理模块
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
+# Standard library imports
 
-# User-defined Modules
+# Third party imports
+
+# Local application imports
 from project.app import app
 from project.config.sys_config import prefix_api_path as root_url
 
 
 """ 路由注册 """
-from project.modules.user.user import user_router
 from project.modules.file_upload_download.file_download import download_router as file_download_router
 from project.modules.file_upload_download.file_upload import upload_router as file_upload_router
 from project.modules.resp_return_way.resp_return_way import resp_return_way_router
+from project.modules.user.user import user_router
 
 BLUEPRINT_LIST = [
     {"blueprint": user_router, "url_prefix": "/user"},

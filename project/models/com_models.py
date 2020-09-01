@@ -6,9 +6,11 @@
 @Desc :  公共模型
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
+# Standard library imports
+
+# Third party imports
 from pydantic import conint
-# User-defined Modules
+# Local application imports
 from project.models.proj_base_model import ProjectBaseModel
 
 

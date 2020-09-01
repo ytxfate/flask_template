@@ -2,19 +2,21 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  global_exception_handler.py
+@File :  global_exception_handler.py  
 @Desc :  全局异常处理
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
-from flask import request
-from werkzeug.exceptions import HTTPException
+# Standard library imports
 import logging
+# Third party imports
+from flask import request
 from pydantic import ValidationError
-# User-defined Modules
+from werkzeug.exceptions import HTTPException
+# Local application imports
 from project.app import app
-from project.utils.comm_ret import comm_ret
 from project.utils import resp_code
+from project.utils.comm_ret import comm_ret
+
 
 logger = logging.getLogger('exception')
 

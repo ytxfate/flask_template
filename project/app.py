@@ -2,19 +2,20 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  app.py
+@File :  app.py  
 @Desc :  项目基本配置模块
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
-from flask import Flask, request
-import flask_cors
-from werkzeug.exceptions import HTTPException
+# Standard library imports
 from logging.config import dictConfig
+# Third party imports
+from flask import Flask, request
 from flask import g
-
-# User-defined Modules
+from werkzeug.exceptions import HTTPException
+import flask_cors
+# Local application imports
 from project.config.sys_config import SECRET_KEY
+
 
 '''
 # nginx 代理后获取真实ip地址
@@ -45,8 +46,8 @@ dictConfig({
 })
 
 # json 序列化处理
-from flask.json import JSONEncoder as f_JSONEncoder
 from datetime import date, datetime
+from flask.json import JSONEncoder as f_JSONEncoder
 class JSONEncoder(f_JSONEncoder):
     def default(self, o):   # pylint: disable=E0202
         if isinstance(o, datetime):

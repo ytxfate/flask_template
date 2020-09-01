@@ -2,19 +2,21 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  file_download.py
+@File :  file_download.py  
 @Desc :  文件下载模块
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
-from flask import send_from_directory, send_file, request, Blueprint
-import os
+# Standard library imports
 import csv
 import io
+import os
+# Third party imports
+from flask import send_from_directory, send_file, request, Blueprint
 import flask
-# User-defined Modules
-from project.utils.comm_ret import comm_ret
+# Local application imports
 from project.utils import resp_code
+from project.utils.comm_ret import comm_ret
+
 
 # 下载文件存储路径
 DOWNLOAD_FILE_PATH = "file/download/"

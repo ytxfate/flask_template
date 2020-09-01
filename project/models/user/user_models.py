@@ -6,9 +6,11 @@
 @Desc :  用户模型
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
+# Standard library imports
+
+# Third party imports
 from pydantic import constr
-# User-defined Modules
+# Local application imports
 from project.models.proj_base_model import ProjectBaseModel
 
 
@@ -18,6 +20,7 @@ class LoginInfoModel(ProjectBaseModel):
     """
     username: constr(strip_whitespace=True, min_length=6)
     password: constr(strip_whitespace=True, min_length=6)
+
 
 class RefreshJWTModel(ProjectBaseModel):
     """

@@ -2,21 +2,22 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  user.py
+@File :  user.py  
 @Desc :  用户管理模块
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
-from flask import jsonify, Response, make_response, g, request, Blueprint
-import json
+# Standard library imports
 import copy
+import json
+# Third party imports
+from flask import jsonify, Response, make_response, g, request, Blueprint
 import flask
-# User-defined Modules
-from project.utils.jwt_auth import JWTAuth
-from project.utils.comm_ret import comm_ret
-from project.utils import resp_code
-from project.utils.handle_req_param import HandleReqParam
+# Local application imports
 from project.models.user.user_models import LoginInfoModel, RefreshJWTModel
+from project.utils import resp_code
+from project.utils.comm_ret import comm_ret
+from project.utils.handle_req_param import HandleReqParam
+from project.utils.jwt_auth import JWTAuth
 
 
 user_router = Blueprint("user", __name__)

@@ -2,19 +2,21 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  file_upload.py
+@File :  file_upload.py  
 @Desc :  文件上传模块
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
-from flask import request, Blueprint
-from werkzeug.utils import secure_filename
-import time
-from pypinyin import lazy_pinyin
+# Standard library imports
 import os
-# User-defined Modules
-from project.utils.comm_ret import comm_ret
+import time
+# Third party imports
+from flask import request, Blueprint
+from pypinyin import lazy_pinyin
+from werkzeug.utils import secure_filename
+# Local application imports
 from project.utils import resp_code
+from project.utils.comm_ret import comm_ret
+
 
 # 上传文件存储路径
 UPLOAD_FILE_PATH = "./file/upload/"

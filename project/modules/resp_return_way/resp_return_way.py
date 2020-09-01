@@ -2,15 +2,16 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  resp_return_way.py
+@File :  resp_return_way.py  
 @Desc :  response 返回的方式
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
-from flask import jsonify, Response, make_response, Blueprint
+# Standard library imports
 import json
+# Third party imports
+from flask import jsonify, Response, make_response, Blueprint
 import flask
-# User-defined Modules
+# Local application imports
 
 
 resp_return_way_router = Blueprint("resp_return_way", __name__)

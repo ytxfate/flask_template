@@ -2,14 +2,17 @@
 # -*- coding:utf-8 -*-
 
 '''
-@File :  comm_ret.py
+@File :  comm_ret.py  
 @Desc :  response 统一返回封装
 '''
 
-# The Python Standard Modules(Library) and Third Modules(Library)
+# Standard library imports
+
+# Third party imports
 from flask import jsonify
-# User-defined Modules
+# Local application imports
 from project.utils.resp_code import SUCCESS
+
 
 def comm_ret(code: int=SUCCESS, isSuccess: bool=True,
                     msg: str="请求成功", resp: object={}):
